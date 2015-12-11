@@ -550,11 +550,13 @@ def Register(request):
             randomGen = Random.new().read
             genKey = RSA.generate(1024, randomGen)
 
-            key = Key.objects.create()
-            key.user = user
-            key.rKey = genKey
-            key.publicKey = genKey.publickey().exportKey()
-            key.privateKey = genKey.exportKey()
+            key = Key.objects.create(user=user,rKey=genKey,publicKey = genKey.publickey().exportKey(),privateKey = genKey.exportKey())
+
+            # key = Key.objects.create()
+            # key.user = user
+            # key.rKey = genKey
+            # key.publicKey = genKey.publickey().exportKey()
+            # key.privateKey = genKey.exportKey()
 
             user.save()
             key.save()
